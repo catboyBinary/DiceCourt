@@ -243,10 +243,11 @@ func done():
 	client.leave()
 	clientStatus = 0
 	bin.hasDice = false	
-	dice.translation = Vector3(0, -3, 0)
+	dice.translation = Vector3(0, 1, -1)
 	dice.pickedUp = false
 	userCard.translation = Vector3(0, -3, 0)
 	userCard.moved = false
+	dollarBills.returnBack()
 	ledger.get_node("MeshInstance").mesh = ledgerClosedMesh
 	ledger.get_node("Viewport/Label").text = ''
 	dialogueBox.hide()
@@ -368,7 +369,7 @@ func _process(delta):
 			
 			bin.hasDice = false
 				
-			dice.translation = Vector3(0, -3, 0)
+			dice.translation = Vector3(0, 1, -1)
 			userCard.translation = Vector3(0, -3, 0)
 			userCard.moved = false
 			

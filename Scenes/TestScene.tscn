@@ -27,7 +27,7 @@
 [ext_resource path="res://Assets/Sprites/cheatExample.png" type="Texture" id=25]
 [ext_resource path="res://Objects/Dollar_Bills.tscn" type="PackedScene" id=26]
 [ext_resource path="res://Assets/Sounds/Music/dayend.ogg" type="AudioStream" id=27]
-[ext_resource path="res://Assets/Sounds/SFX/backgroundChatter.wav" type="AudioStream" id=28]
+[ext_resource path="res://Assets/Sounds/SFX/backgroundChatter.ogg" type="AudioStream" id=28]
 
 [sub_resource type="ConcavePolygonShape" id=1]
 data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
@@ -207,7 +207,7 @@ transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
 shape = SubResource( 1 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall6"]
-transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+transform = Transform( 1, 0, 3.55271e-15, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
 mesh = SubResource( 2 )
 skeleton = NodePath("../../../..")
@@ -276,12 +276,14 @@ transform = Transform( 1.19209e-07, 0, -3.78, 0, 3.78, 0, 3.78, 0, 1.19209e-07, 
 
 [node name="Curvy Legs001" parent="StaticObjects/Tables/table" index="0"]
 use_in_baked_light = true
+material/0 = null
 
 [node name="table2" parent="StaticObjects/Tables" instance=ExtResource( 3 )]
 transform = Transform( 3.78, 0, 2.84438e-07, 0, 3.78, 0, -2.84438e-07, 0, 3.78, -5.66448, 0, 4.293 )
 
 [node name="Curvy Legs001" parent="StaticObjects/Tables/table2" index="0"]
 use_in_baked_light = true
+material/0 = null
 
 [node name="table3" parent="StaticObjects/Tables" instance=ExtResource( 3 )]
 transform = Transform( 3.78, 0, 2.84438e-07, 0, 3.78, 0, -2.84438e-07, 0, 3.78, 5.63552, 0, 4.293 )
@@ -289,6 +291,7 @@ transform = Transform( 3.78, 0, 2.84438e-07, 0, 3.78, 0, -2.84438e-07, 0, 3.78, 
 [node name="Curvy Legs001" parent="StaticObjects/Tables/table3" index="0"]
 transform = Transform( 1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, 0, 0, 0 )
 use_in_baked_light = true
+material/0 = null
 
 [node name="Floor" type="StaticBody" parent="StaticObjects"]
 transform = Transform( 23.0035, 0, 0, 0, 0.32376, 0, 0, 0, 16.188, -14, 0, -1 )
@@ -354,12 +357,13 @@ material/0 = SubResource( 8 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75019, 5.39344, 2.01667 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/DiceBlocker"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.245232, 0, 0 )
 shape = SubResource( 24 )
 
 [node name="Light" type="Spatial" parent="."]
 
 [node name="OmniLight" type="OmniLight" parent="Light"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 13.6972, 6.84056 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.1, 13.8212, 6.84056 )
 light_energy = 1.482
 light_indirect_energy = 6.818
 shadow_enabled = true
@@ -594,6 +598,10 @@ stream = ExtResource( 28 )
 volume_db = -18.0
 autoplay = true
 bus = "SFX"
+
+[node name="BakedLightmap" type="BakedLightmap" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9134, 7.08344, -0.529676 )
+extents = Vector3( 24.8127, 12.2513, 18.1389 )
 
 [editable path="Player"]
 [editable path="Player/Pivot/Camera/ColorRect"]

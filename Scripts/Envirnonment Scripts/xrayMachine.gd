@@ -50,7 +50,7 @@ func _process(delta):
 		if !get_node("../Click").is_playing():
 			get_node("../Click").play()
 		if status == 'waiting':
-			proccessingTimer = 900
+			proccessingTimer = 24
 		pressed = false
 
 	if proccessingTimer > 0:
@@ -59,8 +59,8 @@ func _process(delta):
 			get_node("../BuzzingSound").play()
 
 		status = 'processing'
-		proccessingTimer -= 1
-		if proccessingTimer == 0:
+		proccessingTimer -= delta
+		if proccessingTimer <= 0:
 			status = 'done'
 			
 			if get_node("../BuzzingSound").is_playing():

@@ -29,7 +29,7 @@ onready var fallingFace = faces[0]
 
 func _ready():
 	originalPos = global_transform.origin
-	translation = Vector3(0, -1, 0)
+	translation = Vector3(0, 1, -1)
 
 func setRot():
 	if mode == RigidBody.MODE_RIGID:
@@ -42,9 +42,9 @@ func setUpright():
 
 func _physics_process(delta):
 	if waterTimer > 0:
-		waterTimer -= 1
+		waterTimer -= delta
 	
-	if waterTimer == 0 and wet:
+	if waterTimer <= 0 and wet:
 		setRot()
 
 
@@ -68,7 +68,7 @@ func _on_TestArea_area_entered(area):
 		if rigged and face < 3:
 			face += 2
 		fallingFace = faces[face]
-		waterTimer = 120 
+		waterTimer = 2 
 		wet = true
 		
 
