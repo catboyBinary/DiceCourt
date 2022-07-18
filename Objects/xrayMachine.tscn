@@ -1,0 +1,135 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://Assets/3D Models/Textures/White.material" type="Material" id=1]
+[ext_resource path="res://Assets/3D Models/Textures/Red.material" type="Material" id=2]
+[ext_resource path="res://Assets/3D Models/Textures/Gray.material" type="Material" id=3]
+[ext_resource path="res://Assets/3D Models/Textures/Black.material" type="Material" id=4]
+[ext_resource path="res://Scripts/Envirnonment Scripts/xrayMachine.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Fonts/Arialn.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Assets/Sounds/SFX/xrayButton.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/Sounds/SFX/xrayBuzz.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Misc/xRayNewMesh.tres" type="ArrayMesh" id=9]
+[ext_resource path="res://Assets/Misc/xrayDoor.tres" type="ArrayMesh" id=10]
+
+[sub_resource type="DynamicFont" id=6]
+size = 80
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 6 )
+
+[sub_resource type="ViewportTexture" id=7]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.206562, 0.024856, 0.2 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 1.58531, 1.30948, 1 )
+
+[sub_resource type="BoxShape" id=4]
+
+[sub_resource type="BoxShape" id=5]
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 1, 0.771412, 1.1478 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.00415058, 0.0847591, 0.135864 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 1.2473, 1, 1 )
+
+[node name="XrayMachine" type="StaticBody"]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 400, 100 )
+
+[node name="Label" type="Label" parent="Viewport"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.0745098, 0.384314, 0, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Insert dice"
+align = 1
+valign = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.0514897, -0.00448934, 0, 0.00397367, 0.0581716, 0, 0, 0, 0.0438663, 0.0943202, 0.432677, 1.9379e-05 )
+flip_v = true
+axis = 0
+texture = SubResource( 7 )
+
+[node name="Mesh" type="MeshInstance" parent="."]
+transform = Transform( 1.36364, 0, 0, 0, 1, 0, 0, 0, 1.36364, 0, 0, 0 )
+mesh = ExtResource( 9 )
+material/0 = ExtResource( 1 )
+material/1 = ExtResource( 2 )
+material/2 = ExtResource( 3 )
+material/3 = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00798011, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.015, -0.0046427, 0.131634, -0.141173 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.015, -0.0046427, 0.131634, 0.134415 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-09, 0, 0.015, 0, 0.1, 0, -0.1, 0, -6.55671e-10, -0.128675, 0.131634, 0.0135053 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="."]
+transform = Transform( 0.142368, 0, 0, 0, 0.142368, 0, 0, 0, 0.142368, 0, 0.372078, 0 )
+shape = SubResource( 4 )
+
+[node name="Button" type="StaticBody" parent="."]
+script = ExtResource( 5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Button"]
+transform = Transform( 0.0355882, 0, 0, 0, 0.0355882, 0, 0, 0, 0.0355882, 0.115567, 0.35552, 0 )
+shape = SubResource( 5 )
+
+[node name="DiceArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="DiceArea"]
+transform = Transform( 0.111573, 0, 0, 0, 0.0954282, 0, 0, 0, 0.111573, 0, 0.0817632, 0 )
+shape = SubResource( 8 )
+
+[node name="BuzzingSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "SFX"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "SFX"
+
+[node name="Door" type="KinematicBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Door"]
+transform = Transform( 3.37731, 0, 0, 0, 1, 0, 0, 0, 1, 0.155912, 0.110828, 0 )
+shape = SubResource( 9 )
+
+[node name="Door" type="MeshInstance" parent="Door"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.156209, 0.108369, -0.0207655 )
+mesh = ExtResource( 10 )
+skeleton = NodePath("../..")
+material/0 = null
+material/1 = null
+
+[node name="DiceBlocker" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="DiceBlocker"]
+transform = Transform( 0.109212, 0, 0, 0, 0.109212, 0, 0, 0, 0.109212, 0.00389571, 0.102447, 0 )
+shape = SubResource( 10 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="body_entered" from="DiceArea" to="Button" method="_on_DiceArea_body_entered"]
+[connection signal="body_exited" from="DiceArea" to="Button" method="_on_DiceArea_body_exited"]

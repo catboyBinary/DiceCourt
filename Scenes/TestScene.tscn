@@ -1,0 +1,616 @@
+[gd_scene load_steps=54 format=2]
+
+[ext_resource path="res://Objects/Dice.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/table.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Enemy Scripts/userDataGenerator.gd" type="Script" id=4]
+[ext_resource path="res://Objects/UserCard.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Ledger.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/WaterTank.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/xrayMachine.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/Monitor.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/CashierCage.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Objects/Door.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Objects/DoorFrame.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/clock.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Objects/Bell.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/3D Models/Textures/blueCarpet.jpg" type="Texture" id=15]
+[ext_resource path="res://Assets/3D Models/Textures/wall1.png" type="Texture" id=16]
+[ext_resource path="res://Objects/Casino_Lamp.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Objects/ceilingLamp.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Objects/Client.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Objects/tray.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Objects/bin.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Assets/Sounds/Music/game1.mp3" type="AudioStream" id=22]
+[ext_resource path="res://Assets/Fonts/Arialn.ttf" type="DynamicFontData" id=23]
+[ext_resource path="res://Objects/StickyNote.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Assets/Sprites/cheatExample.png" type="Texture" id=25]
+[ext_resource path="res://Objects/Dollar_Bills.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Assets/Sounds/Music/dayend.ogg" type="AudioStream" id=27]
+[ext_resource path="res://Assets/Sounds/SFX/backgroundChatter.wav" type="AudioStream" id=28]
+
+[sub_resource type="ConcavePolygonShape" id=1]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_texture = ExtResource( 16 )
+uv1_scale = Vector3( 1.628, 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=10]
+albedo_texture = ExtResource( 16 )
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_texture = ExtResource( 16 )
+
+[sub_resource type="SpatialMaterial" id=12]
+albedo_texture = ExtResource( 16 )
+
+[sub_resource type="SpatialMaterial" id=13]
+albedo_texture = ExtResource( 16 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.239216, 0.168627, 0.152941, 1 )
+
+[sub_resource type="PlaneMesh" id=7]
+
+[sub_resource type="SpatialMaterial" id=8]
+albedo_texture = ExtResource( 15 )
+
+[sub_resource type="BoxShape" id=24]
+extents = Vector3( 1.98444, 5.03901, 2.1003 )
+
+[sub_resource type="ViewportTexture" id=5]
+viewport_path = NodePath("Interactables/UserCard/Viewport")
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Interactables/XrayMachine/Viewport")
+
+[sub_resource type="ViewportTexture" id=6]
+viewport_path = NodePath("Interactables/Ledger/Viewport")
+
+[sub_resource type="CubeMesh" id=16]
+
+[sub_resource type="SpatialMaterial" id=17]
+albedo_color = Color( 1, 0.968627, 0.47451, 1 )
+
+[sub_resource type="ViewportTexture" id=15]
+viewport_path = NodePath("StickyNotes/WaterTankNote/Viewport")
+
+[sub_resource type="DynamicFont" id=4]
+size = 34
+use_filter = true
+font_data = ExtResource( 23 )
+
+[sub_resource type="ViewportTexture" id=18]
+viewport_path = NodePath("StickyNotes/LedgerNote/Viewport")
+
+[sub_resource type="CubeMesh" id=19]
+
+[sub_resource type="SpatialMaterial" id=20]
+albedo_color = Color( 1, 0.968627, 0.47451, 1 )
+
+[sub_resource type="ViewportTexture" id=21]
+viewport_path = NodePath("StickyNotes/XrayNote/Viewport")
+
+[sub_resource type="DynamicFont" id=22]
+size = 37
+use_filter = true
+font_data = ExtResource( 23 )
+
+[sub_resource type="ViewportTexture" id=23]
+viewport_path = NodePath("StickyNotes/TrashNote/Viewport")
+
+[sub_resource type="ViewportTexture" id=25]
+viewport_path = NodePath("StickyNotes/CheatExampleNote/Viewport")
+
+[node name="TestRoom" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 2.28, 0, 0, 0, 2.28, 0, 0, 0, 2.28, 0, 0.6, 7 )
+
+[node name="Interactor" parent="Player/Pivot/Camera" index="0"]
+cast_to = Vector3( 0, -12, 0 )
+debug_shape_custom_color = Color( 0, 1, 0.0627451, 1 )
+debug_shape_thickness = 3
+
+[node name="ColorRect" parent="Player/Pivot/Camera" index="4"]
+gameControllerPath = NodePath("../../../..")
+
+[node name="Button" parent="Player/Pivot/Camera/blackscreen/Text" index="6"]
+focus_mode = 0
+
+[node name="Client" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, -0.2, -1.5 )
+
+[node name="StaticObjects" type="Spatial" parent="."]
+
+[node name="Walls" type="Spatial" parent="StaticObjects"]
+
+[node name="Wall" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( 13.49, 0, 0, 0, 0.32376, 0, 0, 0, 13.49, -4.36984, 7.72575, 15.5505 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 9 )
+
+[node name="Wall2" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( 13.49, 0, 0, 0, 0.32376, 0, 0, 0, 13.49, -4.36984, 7.72575, -16.7495 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall2"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall2"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 10 )
+
+[node name="Wall3" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( -4.70863e-07, 0, -13.49, 0, 0.32376, 0, 10.2964, 0, -5.63625e-07, 8.54249, 7.72575, 6.95051 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall3"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall3"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 10 )
+
+[node name="Wall4" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( -2.45618e-07, 0, -13.49, 0, 0.32376, 0, 5.6191, 0, -5.89667e-07, -8.64828, 7.72575, 4.27459 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall4"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall4"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 10 )
+
+[node name="Wall5" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( -2.91979, 0, 2.11686e-06, 0, 0.32376, 0, -4.2423e-07, 0, -13.49, -5.20702, 7.72575, -0.69883 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall5"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall5"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 11 )
+
+[node name="Wall6" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( -2.64652, 0, 1.91874e-06, 0, 0.32376, 0, -4.2423e-07, 0, -13.49, 5.29144, 7.72575, -0.69883 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall6"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall6"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 11 )
+
+[node name="Wall7" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( -2.64652, 0, 1.91874e-06, 0, 0.105344, 0, -3.99492e-07, 0, -12.7033, 0.0316446, 12.9643, -0.659768 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall7"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall7"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 12 )
+
+[node name="Wall8" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( -3.08547e-07, 0, -13.49, 0, 0.0748834, 0, 2.64652, 0, -1.32907e-06, -8.66338, 13.6822, 12.2855 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall8"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall8"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 13 )
+
+[node name="Wall9" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( -4.70863e-07, 0, -13.49, 0, 0.32376, 0, 5.27833, 0, -2.88937e-07, 8.54249, 7.72575, -13.9495 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall9"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall9"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 10 )
+
+[node name="Wall10" type="StaticBody" parent="StaticObjects/Walls"]
+transform = Transform( -4.70863e-07, 0, -13.49, 0, 0.064752, 0, 3.12256, 0, -1.7093e-07, 8.54249, 13.4258, -6.0495 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall10"]
+transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall10"]
+transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../../..")
+material/0 = SubResource( 10 )
+
+[node name="Tables" type="Spatial" parent="StaticObjects"]
+
+[node name="table" parent="StaticObjects/Tables" instance=ExtResource( 3 )]
+transform = Transform( 1.19209e-07, 0, -3.78, 0, 3.78, 0, 3.78, 0, 1.19209e-07, 0, 0, 2.4 )
+
+[node name="Curvy Legs001" parent="StaticObjects/Tables/table" index="0"]
+use_in_baked_light = true
+
+[node name="table2" parent="StaticObjects/Tables" instance=ExtResource( 3 )]
+transform = Transform( 3.78, 0, 2.84438e-07, 0, 3.78, 0, -2.84438e-07, 0, 3.78, -5.66448, 0, 4.293 )
+
+[node name="Curvy Legs001" parent="StaticObjects/Tables/table2" index="0"]
+use_in_baked_light = true
+
+[node name="table3" parent="StaticObjects/Tables" instance=ExtResource( 3 )]
+transform = Transform( 3.78, 0, 2.84438e-07, 0, 3.78, 0, -2.84438e-07, 0, 3.78, 5.63552, 0, 4.293 )
+
+[node name="Curvy Legs001" parent="StaticObjects/Tables/table3" index="0"]
+transform = Transform( 1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, 0, 0, 0 )
+use_in_baked_light = true
+
+[node name="Floor" type="StaticBody" parent="StaticObjects"]
+transform = Transform( 23.0035, 0, 0, 0, 0.32376, 0, 0, 0, 16.188, -14, 0, -1 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Floor"]
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Floor"]
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="Ceiling" type="StaticBody" parent="StaticObjects"]
+transform = Transform( 23.0035, 0, 0, 0, 0.32376, 0, 0, 0, 16.188, -14, 15.2173, -1 )
+
+[node name="Collider" type="CollisionShape" parent="StaticObjects/Ceiling"]
+shape = SubResource( 1 )
+
+[node name="Mesh" type="MeshInstance" parent="StaticObjects/Ceiling"]
+use_in_baked_light = true
+mesh = SubResource( 2 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 3 )
+
+[node name="CashierCage" parent="StaticObjects" instance=ExtResource( 10 )]
+transform = Transform( 3.78, 0, 0, 0, 3.78, 0, 0, 0, 3.78, 0, 0, 0.0983257 )
+
+[node name="Dooor" parent="StaticObjects" instance=ExtResource( 11 )]
+transform = Transform( -1.65229e-07, 0, 3.78, 0, 3.78, 0, -3.78, 0, -1.65229e-07, -8.4583, 0.193483, 10.6644 )
+
+[node name="Door001" parent="StaticObjects/Dooor" index="0"]
+use_in_baked_light = true
+
+[node name="DoorFrame" parent="StaticObjects" instance=ExtResource( 12 )]
+transform = Transform( -1.65229e-07, 0, -3.78, 0, 3.78, 0, 3.78, 0, -1.65229e-07, -8.50282, 0, 12.2577 )
+
+[node name="Cube010" parent="StaticObjects/DoorFrame" index="0"]
+use_in_baked_light = true
+
+[node name="Door2" parent="StaticObjects" instance=ExtResource( 11 )]
+transform = Transform( -1.65229e-07, 0, 3.78, 0, 3.78, 0, -3.78, 0, -1.65229e-07, 8.4417, 0.193483, -7.5356 )
+
+[node name="Door001" parent="StaticObjects/Door2" index="0"]
+use_in_baked_light = true
+
+[node name="DoorFrame2" parent="StaticObjects" instance=ExtResource( 12 )]
+transform = Transform( -1.65229e-07, 0, -3.78, 0, 3.78, 0, 3.78, 0, -1.65229e-07, 8.39718, 0, -5.9423 )
+
+[node name="Cube010" parent="StaticObjects/DoorFrame2" index="0"]
+use_in_baked_light = true
+
+[node name="clock" parent="StaticObjects" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.85915, 8.14197, 0.0395242 )
+gameControllerPath = NodePath("../..")
+
+[node name="Carpet" type="MeshInstance" parent="StaticObjects"]
+transform = Transform( 7.038, 0, 0, 0, 1, 0, 0, 0, 5.875, 0, 0.4, 7.3 )
+mesh = SubResource( 7 )
+material/0 = SubResource( 8 )
+
+[node name="DiceBlocker" type="StaticBody" parent="StaticObjects"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75019, 5.39344, 2.01667 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/DiceBlocker"]
+shape = SubResource( 24 )
+
+[node name="Light" type="Spatial" parent="."]
+
+[node name="OmniLight" type="OmniLight" parent="Light"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 13.6972, 6.84056 )
+light_energy = 1.482
+light_indirect_energy = 6.818
+shadow_enabled = true
+shadow_bias = 0.05
+omni_range = 21.0
+omni_shadow_mode = 0
+
+[node name="OmniLight2" type="OmniLight" parent="Light"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.0972, -13.4 )
+light_energy = 1.237
+light_indirect_energy = 6.818
+shadow_enabled = true
+omni_range = 56.0
+
+[node name="Casino_Lamp" parent="Light" instance=ExtResource( 17 )]
+transform = Transform( -8.30516e-08, 0, -1.9, 0, 1.9, 0, 1.9, 0, -8.30516e-08, 0, 11.8813, -14.1 )
+
+[node name="Casino_Lamp2" parent="Light" instance=ExtResource( 17 )]
+transform = Transform( -8.30516e-08, 0, -1.9, 0, 1.9, 0, 1.9, 0, -8.30516e-08, -12, 11.8813, -14.1 )
+
+[node name="ceilingLamp" parent="Light" instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 14.4, 6.9 )
+
+[node name="Interactables" type="Spatial" parent="."]
+
+[node name="Dice" parent="Interactables" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.903408, 4.33842, 1.39286 )
+can_sleep = false
+
+[node name="MeshInstance" parent="Interactables/Dice" index="0"]
+use_in_baked_light = true
+
+[node name="Tray" parent="Interactables" instance=ExtResource( 20 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 3, -0.911502, 3.91233, 1.43066 )
+
+[node name="UserCard" parent="Interactables" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0271183, 3.92765, 1.68562 )
+
+[node name="Text" parent="Interactables/UserCard" index="0"]
+texture = SubResource( 5 )
+
+[node name="Bell" parent="Interactables" instance=ExtResource( 14 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 2.25545, 3.91614, 3.24997 )
+
+[node name="WaterTank" parent="Interactables" instance=ExtResource( 7 )]
+transform = Transform( -7.86805e-07, 0, 18, 0, 7, 0, -18, 0, -7.86805e-07, -4.59735, 4.19479, 6.68151 )
+
+[node name="Water" parent="Interactables/WaterTank" index="6"]
+gravity_distance_scale = 5.367
+linear_damp = 0.01
+angular_damp = 1.0
+
+[node name="MeshInstance" parent="Interactables/WaterTank/Water" index="0"]
+use_in_baked_light = true
+
+[node name="Monitor" parent="Interactables" instance=ExtResource( 9 )]
+transform = Transform( 9.8995, 0, -9.8995, 0, 14, 0, 9.8995, 0, 9.8995, 4.46013, 3.91953, 3.50691 )
+
+[node name="Mesh" parent="Interactables/Monitor" index="0"]
+use_in_baked_light = true
+
+[node name="Sprite3D" parent="Interactables/Monitor" index="2"]
+texture = null
+
+[node name="XrayMachine" parent="Interactables" instance=ExtResource( 8 )]
+transform = Transform( -3, 0, -2.62268e-07, 0, 3, 0, 2.62268e-07, 0, -3, 4.87081, 3.94979, 5.58562 )
+
+[node name="Sprite3D" parent="Interactables/XrayMachine" index="1"]
+texture = SubResource( 14 )
+
+[node name="Ledger" parent="Interactables" instance=ExtResource( 6 )]
+transform = Transform( 0.877916, 0, 0.478814, 0, 1, 0, -0.478814, 0, 0.877916, -4.14769, 3.90217, 3.4821 )
+
+[node name="Text" parent="Interactables/Ledger" index="0"]
+texture = SubResource( 6 )
+
+[node name="MeshInstance" parent="Interactables/Ledger" index="2"]
+use_in_baked_light = true
+
+[node name="Bin" parent="Interactables" instance=ExtResource( 21 )]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 5.4, 0.464976, 9.7 )
+
+[node name="StickyNotes" type="Spatial" parent="."]
+
+[node name="WaterTankNote" type="Spatial" parent="StickyNotes"]
+transform = Transform( -1.52609e-08, 0, 0.349128, 0, 0.349128, 0, -0.349128, 0, -1.52609e-08, -8, 5.4, 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StickyNotes/WaterTankNote"]
+transform = Transform( 1.8564, 0, 0, 0, 2.99, 0, 0, 0, -0.00590685, 0, 0, 0 )
+mesh = SubResource( 16 )
+material/0 = SubResource( 17 )
+
+[node name="Text" type="Sprite3D" parent="StickyNotes/WaterTankNote"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032538, 0.402, 0.06217 )
+flip_v = true
+texture = SubResource( 15 )
+
+[node name="Viewport" type="Viewport" parent="StickyNotes/WaterTankNote"]
+size = Vector2( 300, 500 )
+transparent_bg = true
+msaa = 4
+fxaa = true
+sharpen_intensity = 1.0
+usage = 0
+
+[node name="Label" type="Label" parent="StickyNotes/WaterTankNote/Viewport"]
+margin_right = 288.0
+margin_bottom = 161.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Rigged die float with big numbers up, but it can also be luck. Do a couple of runs to be sure, don't shoo my customers away"
+autowrap = true
+
+[node name="LedgerNote" type="Spatial" parent="StickyNotes"]
+transform = Transform( 0.33559, 0, 0, 0, 0.33559, 0, 0, 0, 0.33559, -4.21195, 5.66823, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StickyNotes/LedgerNote"]
+transform = Transform( 1.8564, 0, 0, 0, 2.99, 0, 0, 0, -0.00590685, 0, 0, 0 )
+mesh = SubResource( 16 )
+material/0 = SubResource( 17 )
+
+[node name="Text" type="Sprite3D" parent="StickyNotes/LedgerNote"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032538, 0.402, 0.06217 )
+flip_v = true
+texture = SubResource( 18 )
+
+[node name="Viewport" type="Viewport" parent="StickyNotes/LedgerNote"]
+size = Vector2( 300, 500 )
+transparent_bg = true
+msaa = 4
+fxaa = true
+sharpen_intensity = 1.0
+usage = 0
+
+[node name="Label" type="Label" parent="StickyNotes/LedgerNote/Viewport"]
+margin_right = 288.0
+margin_bottom = 161.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "These idiots keep coming with fake ID's and think they can get in. Read twice before letting one of them in"
+autowrap = true
+
+[node name="XrayNote" type="Spatial" parent="StickyNotes"]
+transform = Transform( -1.53713e-08, 0, -0.351654, 0, 0.351654, 0, 0.351654, 0, -1.53713e-08, 7.88637, 5.73086, 7.39983 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StickyNotes/XrayNote"]
+transform = Transform( 1.8564, 0, 0, 0, 2.99, 0, 0, 0, -0.00590685, 0, 0, 0 )
+mesh = SubResource( 19 )
+material/0 = SubResource( 20 )
+
+[node name="Text" type="Sprite3D" parent="StickyNotes/XrayNote"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00325394, 0.401999, 0.06217 )
+flip_v = true
+texture = SubResource( 21 )
+
+[node name="Viewport" type="Viewport" parent="StickyNotes/XrayNote"]
+size = Vector2( 300, 500 )
+transparent_bg = true
+msaa = 4
+fxaa = true
+sharpen_intensity = 1.0
+usage = 0
+
+[node name="Label" type="Label" parent="StickyNotes/XrayNote/Viewport"]
+margin_right = 288.0
+margin_bottom = 161.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 22 )
+text = "If you don't feel like bathing dice, you can use the scanner, but it's gonna take some time. Just throw the dice in, close the door and press the button. DON'T do it, unless you are really unsure."
+autowrap = true
+
+[node name="TrashNote" type="Spatial" parent="StickyNotes"]
+transform = Transform( -2.07937e-08, 0, -0.475706, 0, 0.359171, 0, 0.475706, 0, -2.07937e-08, 7.86622, 3.18307, 9.68422 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StickyNotes/TrashNote"]
+transform = Transform( 1.8564, 0, 0, 0, 2.99, 0, 0, 0, -0.00590685, 0, 0, 0 )
+mesh = SubResource( 16 )
+material/0 = SubResource( 17 )
+
+[node name="Text" type="Sprite3D" parent="StickyNotes/TrashNote"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032538, 0.402, 0.06217 )
+flip_v = true
+texture = SubResource( 23 )
+
+[node name="Viewport" type="Viewport" parent="StickyNotes/TrashNote"]
+size = Vector2( 300, 500 )
+transparent_bg = true
+msaa = 4
+fxaa = true
+sharpen_intensity = 1.0
+usage = 0
+
+[node name="Label" type="Label" parent="StickyNotes/TrashNote/Viewport"]
+margin_right = 288.0
+margin_bottom = 161.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Throw all the rigged dice here, they'll get burned at the first occasion. 
+
+
+
+-Fred, stop throwing your lunch leftovers here or you'll get fired"
+autowrap = true
+
+[node name="CheatExampleNote" parent="StickyNotes" instance=ExtResource( 24 )]
+transform = Transform( 0.0964337, 0, -0.0924056, 0, 0.13356, 0, 0.0924056, 0, 0.0964337, 3.62163, 4.45982, 2.80359 )
+
+[node name="Text" parent="StickyNotes/CheatExampleNote" index="1"]
+texture = SubResource( 25 )
+
+[node name="Label" parent="StickyNotes/CheatExampleNote/Viewport" index="0"]
+text = "Here's an example of cheating"
+
+[node name="Sprite3D" type="Sprite3D" parent="StickyNotes/CheatExampleNote"]
+transform = Transform( 0.422952, 0, 3.42727e-07, 0, 0.422952, 0, -3.42727e-07, 0, 0.422952, 0.0413628, -0.786224, 0.0673656 )
+texture = ExtResource( 25 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+autoplay = true
+bus = "Music"
+
+[node name="DayEnd" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 27 )
+bus = "Music"
+
+[node name="Dollar_Bills" parent="." instance=ExtResource( 26 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3, -1 )
+
+[node name="Chatter" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 28 )
+volume_db = -18.0
+autoplay = true
+bus = "SFX"
+
+[editable path="Player"]
+[editable path="Player/Pivot/Camera/ColorRect"]
+[editable path="Client"]
+[editable path="StaticObjects/Tables/table"]
+[editable path="StaticObjects/Tables/table2"]
+[editable path="StaticObjects/Tables/table3"]
+[editable path="StaticObjects/CashierCage"]
+[editable path="StaticObjects/Dooor"]
+[editable path="StaticObjects/DoorFrame"]
+[editable path="StaticObjects/Door2"]
+[editable path="StaticObjects/DoorFrame2"]
+[editable path="Interactables/Dice"]
+[editable path="Interactables/UserCard"]
+[editable path="Interactables/WaterTank"]
+[editable path="Interactables/Monitor"]
+[editable path="Interactables/XrayMachine"]
+[editable path="Interactables/Ledger"]
+[editable path="Interactables/Bin"]
+[editable path="StickyNotes/CheatExampleNote"]
