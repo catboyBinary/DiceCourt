@@ -14,7 +14,7 @@ func _ready():
 	$Screen2/SFX.value = config.get_value("Volume", "SFX")
 	updateValues()
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept") and OS.get_ticks_msec() - starttime < 8200 and $Music.get_playback_position() < 8.2:
 		$Music.seek(8.2)
 		tween.seek(8.2)
@@ -58,10 +58,10 @@ func _on_Credits_pressed():
 	$Camera2D/Tween.start()
 
 
-func _on_Music_value_changed(value):
+func _on_Music_value_changed(_value):
 	updateValues()
 
-func _on_SFX_value_changed(value):
+func _on_SFX_value_changed(_value):
 	updateValues()
 
 func _on_Exit_pressed():

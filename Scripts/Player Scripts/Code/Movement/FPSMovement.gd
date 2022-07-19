@@ -102,7 +102,7 @@ func _ready():
 	if enabled:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-func _process(delta):
+func _process(_delta):
 	if enabled:
 		move()
 

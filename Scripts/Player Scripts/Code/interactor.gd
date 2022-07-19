@@ -23,7 +23,7 @@ func get_interactable():
 	return interactor.get_collider()
 
 
-func _process(delta):
+func _process(_delta):
 	var interactedObj = get_interactable()
 	
 	#dropping dice
@@ -51,9 +51,9 @@ func _process(delta):
 			
 			
 			if interactedObj.name == 'Door':
-				var xray = interactedObj.get_node('../Button')
+				var xrayInteractor = xray.get_node('Button')
 				if Input.is_action_just_pressed("click"):
-					xray.moveDoor()
+					xrayInteractor.moveDoor()
 			
 			if interactedObj.name == 'UserCard' or interactedObj.name == 'Tray':
 				interactedObj.isHovered = true	
