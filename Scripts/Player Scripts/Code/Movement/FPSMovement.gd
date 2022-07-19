@@ -33,6 +33,13 @@ func _unhandled_input(event):
 		#for browsers
 		if Input.is_action_just_released("tdJump"):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			
+		if Input.is_action_just_pressed("zoom"):
+			$Tween.interpolate_property(pivot.get_node("Camera"), "fov", 70, 30, 0.25, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+			$Tween.start()
+		if Input.is_action_just_released("zoom"):
+			$Tween.interpolate_property(pivot.get_node("Camera"), "fov", 30, 70, 0.25, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+			$Tween.start()
 
 func bool2float(boolean):
 	if boolean:

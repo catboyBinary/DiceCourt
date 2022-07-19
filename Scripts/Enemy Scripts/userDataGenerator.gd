@@ -187,7 +187,7 @@ func generateUser():
 	var briberStatus = false
 	if cheaterChance > 0.7:
 		cheaterStatus = true
-		if briberChance > 0.7:
+		if briberChance > 0.8:
 			briberStatus = true
 	
 	var user = userData.new(gender, firstName, lastName, userNumber, birthday, notes, cheaterStatus, briberStatus)
@@ -260,10 +260,10 @@ func endDay():
 	blackscreen.get_node("Tween").start()
 	done()
 	
-	var caught = (randi() % 20 + 10) * caughtCheaters
-	var missed = (randi() % 20 - 45) * missedCheaters
-	var declined = (randi() % 10 - 25) * declinedCustomers
-	var rent = randi() % 120 + 150
+	var caught = (randi() % 30 + 20) * caughtCheaters
+	var missed = (randi() % 10 - 25) * missedCheaters
+	var declined = (randi() % 5 - 15) * declinedCustomers
+	var rent = randi() % 80 + 40
 	getPaid(-rent)
 	getPaid(caught)
 	getPaid(missed)
@@ -281,6 +281,10 @@ func endDay():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 func proceed():
+	caughtCheaters = 0
+	missedCheaters = 0
+	customers = 0
+	declinedCustomers = 0
 	blackscreen.color.a = 0
 	blackscreen.get_node("Text").position = Vector2(0,1080)
 	player.get_node("FPSMovement").enabled = true

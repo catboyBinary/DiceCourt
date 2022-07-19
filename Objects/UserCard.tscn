@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://Assets/Fonts/Arialn.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Fonts/themefont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/Envirnonment Scripts/UserCard.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Sprites/userCard.png" type="Texture" id=3]
 [ext_resource path="res://addons/3D Outline/Outline.shader" type="Shader" id=4]
@@ -8,12 +8,6 @@
 
 [sub_resource type="ViewportTexture" id=6]
 viewport_path = NodePath("Viewport")
-
-[sub_resource type="DynamicFont" id=2]
-size = 40
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 1 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.725709, 0.0231249, 0.315079 )
@@ -38,7 +32,7 @@ transform = Transform( 1.54, 0, 0, 0, 1, 0, 0, 0, 1.4, 0, 0, 0 )
 script = ExtResource( 2 )
 
 [node name="Text" type="Sprite3D" parent="."]
-transform = Transform( 0.255945, 0, 0, 0, 0.0598431, 0, 0, 0, 0.183673, 0.70884, 0.00852395, 0.235187 )
+transform = Transform( 0.233149, 0, 0, 0, 0.0598431, 0, 0, 0, 0.157382, 0.65462, 0.00852395, 0.12194 )
 flip_v = true
 axis = 1
 texture = SubResource( 6 )
@@ -52,11 +46,13 @@ sharpen_intensity = 1.0
 usage = 0
 
 [node name="Label" type="Label" parent="Viewport"]
-margin_right = 40.0
-margin_bottom = 14.0
+margin_right = 267.0
+margin_bottom = 171.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 2 )
-text = "SAMPLE TEXT"
+custom_fonts/font = ExtResource( 1 )
+text = "SAMPLE TEXT
+SAMPLE TEXT
+SAMPLE TEXT"
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109291, 0, -0.31672 )

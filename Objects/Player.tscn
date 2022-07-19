@@ -31,6 +31,8 @@ enabled = true
 receiverPath = NodePath("..")
 cameraPath = NodePath("../Pivot/Camera")
 
+[node name="Tween" type="Tween" parent="FPSMovement"]
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 1.6, 0 )
 shape = SubResource( 1 )

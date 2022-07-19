@@ -85,7 +85,7 @@ func setGreeting():
 		$Text.bbcode_text = briberGreetings[randi() % briberGreetings.size()]	
 		
 	dialogueType = 'greeting'
-	waitingTimer = 26
+	waitingTimer = 34
 	
 func setRejected():
 	var greetingType = randi() % 10
@@ -132,7 +132,7 @@ func setWaiting():
 	
 	gameController.getPaid(-5)
 	dialogueType = 'waiting'
-	waitingTimer = 32
+	waitingTimer = 40
 
 func _process(delta):
 	if !hidden and waitingTimer <= 0 && dialogueType == 'greeting':
