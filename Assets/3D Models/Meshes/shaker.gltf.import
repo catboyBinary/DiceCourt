@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Dollar_Bills.gltf-25de3729ae3b6ccfa88c2fa707277165.scn"
+path="res://.import/shaker.gltf-da405bccbd6e7bca27d0a5846541be48.scn"
 
 [deps]
 
-source_file="res://Assets/3D Models/Meshes/Dollar_Bills.gltf"
-dest_files=[ "res://.import/Dollar_Bills.gltf-25de3729ae3b6ccfa88c2fa707277165.scn" ]
+source_file="res://Assets/3D Models/Meshes/shaker.gltf"
+dest_files=[ "res://.import/shaker.gltf-da405bccbd6e7bca27d0a5846541be48.scn" ]
 
 [params]
 

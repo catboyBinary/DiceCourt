@@ -173,6 +173,17 @@ margin_bottom = -40.0
 focus_mode = 0
 text = "Play"
 
+[node name="Tutorial" type="Button" parent="Screen1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -108.0
+margin_top = -176.0
+margin_right = 108.0
+margin_bottom = -113.0
+text = "Tutorial"
+
 [node name="Title" type="Label" parent="Screen1"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -423,6 +434,7 @@ bus = "Music"
 [connection signal="pressed" from="Screen1/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="pressed" from="Screen1/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="Screen1/Play" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="Screen1/Tutorial" to="." method="_on_Tutorial_pressed"]
 [connection signal="value_changed" from="Screen2/Music" to="." method="_on_Music_value_changed"]
 [connection signal="value_changed" from="Screen2/SFX" to="." method="_on_SFX_value_changed"]
 [connection signal="pressed" from="Screen2/Back" to="." method="_on_Back_pressed"]

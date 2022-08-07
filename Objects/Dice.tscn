@@ -24,6 +24,7 @@ albedo_texture = ExtResource( 1 )
 [sub_resource type="BoxShape" id=2]
 
 [node name="Dice" type="RigidBody"]
+angular_damp = 1.382
 script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

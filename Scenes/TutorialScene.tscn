@@ -1,9 +1,8 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Objects/Dice.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Objects/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Objects/table.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scripts/Enemy Scripts/userDataGenerator.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Enemy Scripts/tutorial.gd" type="Script" id=4]
 [ext_resource path="res://Objects/UserCard.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Objects/Ledger.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Objects/WaterTank.tscn" type="PackedScene" id=7]
@@ -29,11 +28,19 @@
 [ext_resource path="res://Assets/Sounds/Music/dayend.ogg" type="AudioStream" id=27]
 [ext_resource path="res://Assets/Sounds/SFX/backgroundChatter.ogg" type="AudioStream" id=28]
 [ext_resource path="res://Objects/shaker.tscn" type="PackedScene" id=29]
+[ext_resource path="res://Assets/Sprites/crosshair.png" type="Texture" id=30]
+[ext_resource path="res://Scripts/Player Scripts/Nodes/Interactor.tscn" type="PackedScene" id=31]
+[ext_resource path="res://Assets/Misc/DialogueBox.tscn" type="PackedScene" id=32]
+[ext_resource path="res://Scripts/Player Scripts/Nodes/Movement/FPSMovement.tscn" type="PackedScene" id=33]
+[ext_resource path="res://Assets/Envs/new_theme.tres" type="Theme" id=35]
 
-[sub_resource type="ConcavePolygonShape" id=1]
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.8, 4, 1 )
+
+[sub_resource type="ConcavePolygonShape" id=31]
 data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="CubeMesh" id=32]
 
 [sub_resource type="SpatialMaterial" id=9]
 albedo_texture = ExtResource( 16 )
@@ -51,7 +58,7 @@ albedo_texture = ExtResource( 16 )
 [sub_resource type="SpatialMaterial" id=13]
 albedo_texture = ExtResource( 16 )
 
-[sub_resource type="SpatialMaterial" id=3]
+[sub_resource type="SpatialMaterial" id=33]
 albedo_color = Color( 0.239216, 0.168627, 0.152941, 1 )
 
 [sub_resource type="PlaneMesh" id=7]
@@ -60,7 +67,7 @@ albedo_color = Color( 0.239216, 0.168627, 0.152941, 1 )
 albedo_texture = ExtResource( 15 )
 
 [sub_resource type="BoxShape" id=24]
-extents = Vector3( 1.98672, 5.03901, 1.65248 )
+extents = Vector3( 1.98444, 5.03901, 2.1003 )
 
 [sub_resource type="ViewportTexture" id=5]
 viewport_path = NodePath("Interactables/UserCard/Viewport")
@@ -85,6 +92,9 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 23 )
+
+[sub_resource type="ViewportTexture" id=34]
+viewport_path = NodePath("StickyNotes/ShakerNote/Viewport")
 
 [sub_resource type="ViewportTexture" id=18]
 viewport_path = NodePath("StickyNotes/LedgerNote/Viewport")
@@ -131,38 +141,135 @@ outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 23 )
 
-[sub_resource type="CubeMesh" id=31]
-
-[sub_resource type="SpatialMaterial" id=32]
-albedo_color = Color( 1, 0.968627, 0.47451, 1 )
-
-[sub_resource type="ViewportTexture" id=33]
-viewport_path = NodePath("StickyNotes/ShakerNote/Viewport")
-
-[sub_resource type="DynamicFont" id=34]
-size = 43
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 23 )
-
 [node name="TestRoom" type="Spatial"]
 script = ExtResource( 4 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 2.28, 0, 0, 0, 2.28, 0, 0, 0, 2.28, 0, 0.6, 7 )
 
-[node name="Interactor" parent="Player/Pivot/Camera" index="0"]
+[node name="Interactor" parent="Player" instance=ExtResource( 31 )]
+playerPath = NodePath("..")
+interactorPath = NodePath("../Pivot/Camera/Interactor")
+
+[node name="FPSMovement" parent="Player" instance=ExtResource( 33 )]
+enabled = true
+receiverPath = NodePath("..")
+cameraPath = NodePath("../Pivot/Camera")
+
+[node name="Tween" type="Tween" parent="Player/FPSMovement"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 1.6, 0 )
+shape = SubResource( 1 )
+
+[node name="Pivot" type="Spatial" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0 )
+
+[node name="Camera" type="Camera" parent="Player/Pivot"]
+
+[node name="Interactor" type="RayCast" parent="Player/Pivot/Camera"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+enabled = true
 cast_to = Vector3( 0, -12, 0 )
 collision_mask = 3
 debug_shape_custom_color = Color( 0, 1, 0.0627451, 1 )
 debug_shape_thickness = 3
 
-[node name="ColorRect" parent="Player/Pivot/Camera" index="4"]
+[node name="HeldPlace" type="Spatial" parent="Player/Pivot/Camera/Interactor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 2.38419e-07 )
+
+[node name="Crosshair" type="TextureRect" parent="Player/Pivot/Camera"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -960.0
+margin_top = -540.0
+margin_right = 960.0
+margin_bottom = 540.0
+mouse_filter = 2
+texture = ExtResource( 30 )
+expand = true
+stretch_mode = 4
+
+[node name="ColorRect" parent="Player/Pivot/Camera" instance=ExtResource( 32 )]
 gameControllerPath = NodePath("../../../..")
 
-[node name="Button" parent="Player/Pivot/Camera/blackscreen/Text" index="6"]
+[node name="blackscreen" type="ColorRect" parent="Player/Pivot/Camera"]
+margin_left = -40.0
+margin_top = -40.0
+margin_right = 1958.0
+margin_bottom = 1120.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+
+[node name="Text" type="Node2D" parent="Player/Pivot/Camera/blackscreen"]
+position = Vector2( 0, 1080 )
+
+[node name="Money" type="Label" parent="Player/Pivot/Camera/blackscreen/Text"]
+margin_left = 98.0
+margin_top = 124.0
+margin_right = 680.0
+margin_bottom = 210.0
+theme = ExtResource( 35 )
+text = "Total money: "
+
+[node name="rent" type="Label" parent="Player/Pivot/Camera/blackscreen/Text"]
+margin_left = 98.0
+margin_top = 428.0
+margin_right = 680.0
+margin_bottom = 514.0
+theme = ExtResource( 35 )
+text = "House Rent: "
+
+[node name="caught" type="Label" parent="Player/Pivot/Camera/blackscreen/Text"]
+margin_left = 98.0
+margin_top = 204.0
+margin_right = 517.0
+margin_bottom = 290.0
+theme = ExtResource( 35 )
+text = "Cheaters Caught:"
+
+[node name="missed" type="Label" parent="Player/Pivot/Camera/blackscreen/Text"]
+margin_left = 98.0
+margin_top = 284.0
+margin_right = 517.0
+margin_bottom = 370.0
+theme = ExtResource( 35 )
+text = "Cheaters Missed:"
+
+[node name="customers" type="Label" parent="Player/Pivot/Camera/blackscreen/Text"]
+margin_left = 594.0
+margin_top = 204.0
+margin_right = 1060.0
+margin_bottom = 290.0
+theme = ExtResource( 35 )
+text = "Customers Accepted:"
+
+[node name="declined" type="Label" parent="Player/Pivot/Camera/blackscreen/Text"]
+margin_left = 594.0
+margin_top = 284.0
+margin_right = 1051.0
+margin_bottom = 370.0
+theme = ExtResource( 35 )
+text = "Customers Declined:"
+
+[node name="Button" type="Button" parent="Player/Pivot/Camera/blackscreen/Text"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 605.0
+margin_top = 423.0
+margin_right = 757.0
+margin_bottom = 490.0
 focus_mode = 0
+theme = ExtResource( 35 )
+text = "Continue"
+
+[node name="Tween" type="Tween" parent="Player/Pivot/Camera/blackscreen"]
+
+[node name="FloorDetector" type="RayCast" parent="Player"]
 
 [node name="Client" parent="." instance=ExtResource( 19 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8, -0.2, -1.5 )
@@ -176,12 +283,12 @@ transform = Transform( 13.49, 0, 0, 0, 0.32376, 0, 0, 0, 13.49, -4.36984, 7.7257
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall"]
 transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 9 )
 
@@ -190,12 +297,12 @@ transform = Transform( 13.49, 0, 0, 0, 0.32376, 0, 0, 0, 13.49, -4.36984, 7.7257
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall2"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall2"]
 transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 10 )
 
@@ -204,12 +311,12 @@ transform = Transform( -4.70863e-07, 0, -13.49, 0, 0.32376, 0, 10.2964, 0, -5.63
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall3"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall3"]
 transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 10 )
 
@@ -218,12 +325,12 @@ transform = Transform( -2.45618e-07, 0, -13.49, 0, 0.32376, 0, 5.6191, 0, -5.896
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall4"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall4"]
 transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 10 )
 
@@ -232,12 +339,12 @@ transform = Transform( -2.91979, 0, 2.11686e-06, 0, 0.32376, 0, -4.2423e-07, 0, 
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall5"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall5"]
 transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 11 )
 
@@ -246,12 +353,12 @@ transform = Transform( -2.64652, 0, 1.91874e-06, 0, 0.32376, 0, -4.2423e-07, 0, 
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall6"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall6"]
 transform = Transform( 1, 0, 3.55271e-15, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 11 )
 
@@ -260,12 +367,12 @@ transform = Transform( -2.64652, 0, 1.91874e-06, 0, 0.105344, 0, -3.99492e-07, 0
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall7"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall7"]
 transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 12 )
 
@@ -274,12 +381,12 @@ transform = Transform( -3.08547e-07, 0, -13.49, 0, 0.0748834, 0, 2.64652, 0, -1.
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall8"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall8"]
 transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 13 )
 
@@ -288,12 +395,12 @@ transform = Transform( -4.70863e-07, 0, -13.49, 0, 0.32376, 0, 5.27833, 0, -2.88
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall9"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall9"]
 transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 10 )
 
@@ -302,12 +409,12 @@ transform = Transform( -4.70863e-07, 0, -13.49, 0, 0.064752, 0, 3.12256, 0, -1.7
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Walls/Wall10"]
 transform = Transform( 1, 0, 0, 0, 23.715, 0, 0, 0, 0.05, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Walls/Wall10"]
 transform = Transform( 1, 0, 0, 0, 23.94, 0, 0, 0, 0.0475489, 0, 0, 0 )
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../../..")
 material/0 = SubResource( 10 )
 
@@ -339,25 +446,25 @@ material/0 = null
 transform = Transform( 23.0035, 0, 0, 0, 0.32376, 0, 0, 0, 16.188, -14, 0, -1 )
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Floor"]
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Floor"]
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 3 )
+material/0 = SubResource( 33 )
 
 [node name="Ceiling" type="StaticBody" parent="StaticObjects"]
 transform = Transform( 23.0035, 0, 0, 0, 0.32376, 0, 0, 0, 16.188, -14, 15.2173, -1 )
 
 [node name="Collider" type="CollisionShape" parent="StaticObjects/Ceiling"]
-shape = SubResource( 1 )
+shape = SubResource( 31 )
 
 [node name="Mesh" type="MeshInstance" parent="StaticObjects/Ceiling"]
 use_in_baked_light = true
-mesh = SubResource( 2 )
+mesh = SubResource( 32 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 3 )
+material/0 = SubResource( 33 )
 
 [node name="CashierCage" parent="StaticObjects" instance=ExtResource( 10 )]
 transform = Transform( 3.78, 0, 0, 0, 3.78, 0, 0, 0, 3.78, 0, 0, 0.0983257 )
@@ -399,28 +506,7 @@ material/0 = SubResource( 8 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75019, 5.39344, 2.01667 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/DiceBlocker"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.371235, 0, -0.471107 )
-shape = SubResource( 24 )
-
-[node name="DiceBlocker2" type="StaticBody" parent="StaticObjects"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0372066, 5.39344, 2.01667 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/DiceBlocker2"]
-transform = Transform( 4.07638, 0, 0, 0, 0.210076, 0, 0, 0, 0.197225, 0.0899005, -1.22757, -1.75429 )
-shape = SubResource( 24 )
-
-[node name="DiceBlocker3" type="StaticBody" parent="StaticObjects"]
-transform = Transform( -2.36041e-08, 0, 1, 0, 1, 0, -0.54, 0, -4.37114e-08, -5.93721, 5.39344, 4.17422 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/DiceBlocker3"]
-transform = Transform( 4.07638, 0, 0, 0, 0.210076, 0, 0, 0, 0.197225, 0.0899005, -1.22757, -1.75429 )
-shape = SubResource( 24 )
-
-[node name="DiceBlocker4" type="StaticBody" parent="StaticObjects"]
-transform = Transform( -2.36041e-08, 0, 1, 0, 1, 0, -0.54, 0, -4.37114e-08, 9.36279, 5.39344, 4.17422 )
-
-[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/DiceBlocker4"]
-transform = Transform( 4.07638, 0, 0, 0, 0.210076, 0, 0, 0, 0.197225, 0.0899005, -1.22757, -1.75429 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.245232, 0, 0 )
 shape = SubResource( 24 )
 
 [node name="Light" type="Spatial" parent="."]
@@ -513,13 +599,13 @@ use_in_baked_light = true
 transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 5.4, 0.464976, 9.7 )
 
 [node name="shaker" parent="Interactables" instance=ExtResource( 29 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.93179, 4.27827, 3.09842 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.59713, 4.04874, 2.93392 )
 collision_layer = 2
 
 [node name="StickyNotes" type="Spatial" parent="."]
 
 [node name="WaterTankNote" type="Spatial" parent="StickyNotes"]
-transform = Transform( -1.52609e-08, 0, 0.349128, 0, 0.349128, 0, -0.349128, 0, -1.52609e-08, -8, 5.4, 7 )
+transform = Transform( -1.52609e-08, 0, 0.349128, 0, 0.349128, 0, -0.349128, 0, -1.52609e-08, -8, 5.4, 6.8741 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StickyNotes/WaterTankNote"]
 transform = Transform( 1.8564, 0, 0, 0, 2.99, 0, 0, 0, -0.00590685, 0, 0, 0 )
@@ -545,6 +631,35 @@ margin_bottom = 161.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 26 )
 text = "Rigged die float with big numbers up, but it can also be luck. Do a couple of runs to be sure, don't shoo my customers away"
+autowrap = true
+
+[node name="ShakerNote" type="Spatial" parent="StickyNotes"]
+transform = Transform( -1.52609e-08, 0, 0.349128, 0, 0.349128, 0, -0.349128, 0, -1.52609e-08, -8, 5.4, 2.55433 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StickyNotes/ShakerNote"]
+transform = Transform( 1.8564, 0, 0, 0, 2.99, 0, 0, 0, -0.00590685, 0, 0, 0 )
+mesh = SubResource( 16 )
+material/0 = SubResource( 17 )
+
+[node name="Text" type="Sprite3D" parent="StickyNotes/ShakerNote"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032538, 0.402, 0.06217 )
+flip_v = true
+texture = SubResource( 34 )
+
+[node name="Viewport" type="Viewport" parent="StickyNotes/ShakerNote"]
+size = Vector2( 300, 500 )
+transparent_bg = true
+msaa = 4
+fxaa = true
+sharpen_intensity = 1.0
+usage = 0
+
+[node name="Label" type="Label" parent="StickyNotes/ShakerNote/Viewport"]
+margin_right = 288.0
+margin_bottom = 161.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 26 )
+text = "You can use the shaker to quickly test dice. Put the dice in, flip the shaker and see the result"
 autowrap = true
 
 [node name="LedgerNote" type="Spatial" parent="StickyNotes"]
@@ -650,35 +765,6 @@ text = "Here's an example of cheating"
 transform = Transform( 0.422952, 0, 3.42727e-07, 0, 0.422952, 0, -3.42727e-07, 0, 0.422952, 0.0413628, -0.786224, 0.0673656 )
 texture = ExtResource( 25 )
 
-[node name="ShakerNote" type="Spatial" parent="StickyNotes"]
-transform = Transform( -1.52609e-08, 0, 0.349128, 0, 0.349128, 0, -0.349128, 0, -1.52609e-08, -8, 5.4, 2.55433 )
-
-[node name="MeshInstance" type="MeshInstance" parent="StickyNotes/ShakerNote"]
-transform = Transform( 1.8564, 0, 0, 0, 2.99, 0, 0, 0, -0.00590685, 0, 0, 0 )
-mesh = SubResource( 31 )
-material/0 = SubResource( 32 )
-
-[node name="Text" type="Sprite3D" parent="StickyNotes/ShakerNote"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0032538, 0.402, 0.06217 )
-flip_v = true
-texture = SubResource( 33 )
-
-[node name="Viewport" type="Viewport" parent="StickyNotes/ShakerNote"]
-size = Vector2( 300, 500 )
-transparent_bg = true
-msaa = 4
-fxaa = true
-sharpen_intensity = 1.0
-usage = 0
-
-[node name="Label" type="Label" parent="StickyNotes/ShakerNote/Viewport"]
-margin_right = 288.0
-margin_bottom = 161.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 34 )
-text = "You can use the shaker to quickly test dice. Put the dice in, flip the shaker and see the result"
-autowrap = true
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 22 )
 autoplay = true
@@ -701,7 +787,8 @@ bus = "SFX"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.9134, 7.08344, -0.529676 )
 extents = Vector3( 24.8127, 12.2513, 18.1389 )
 
-[editable path="Player"]
+[connection signal="pressed" from="Player/Pivot/Camera/blackscreen/Text/Button" to="Player/Pivot/Camera/ColorRect" method="_on_Button_pressed"]
+
 [editable path="Player/Pivot/Camera/ColorRect"]
 [editable path="Client"]
 [editable path="StaticObjects/Tables/table"]

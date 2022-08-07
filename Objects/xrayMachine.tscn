@@ -124,6 +124,8 @@ material/0 = null
 material/1 = null
 
 [node name="DiceBlocker" type="StaticBody" parent="."]
+collision_layer = 17
+collision_mask = 17
 
 [node name="CollisionShape" type="CollisionShape" parent="DiceBlocker"]
 transform = Transform( 0.109212, 0, 0, 0, 0.109212, 0, 0, 0, 0.109212, 0.00389571, 0.102447, 0 )

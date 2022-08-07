@@ -64,18 +64,18 @@ class userData:
 	var cheater:bool
 	var briber:bool
 	
-	func _init(_gen, _firstName, _lastName, _userNumber, _dateOfBirth, _notes, _cheater, _briber):
-		self.gen = _gen
-		self.firstName = _firstName
-		self.lastName = _lastName
+	func _init(gen, firstName, lastName, userNumber, dateOfBirth, notes, cheater, briber):
+		self.gen = gen
+		self.firstName = firstName
+		self.lastName = lastName
 		
-		self.userNumber = _userNumber
-		self.dateOfBirth = _dateOfBirth
+		self.userNumber = userNumber
+		self.dateOfBirth = dateOfBirth
 		
-		self.notes = _notes
+		self.notes = notes
 		
-		self.cheater = _cheater
-		self.briber = _briber
+		self.cheater = cheater
+		self.briber = briber
 				
 	func getUserCard():
 		var string:String
@@ -303,7 +303,7 @@ func _ready():
 	result.bbcode_text = ""
 	
 
-func _process(_delta):
+func _process(delta):
 	randomize()
 	
 	#print(clientStatus)

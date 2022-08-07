@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/3D Models/Textures/Red.material" type="Material" id=1]
 [ext_resource path="res://Assets/3D Models/Textures/Gray.material" type="Material" id=2]
@@ -72,7 +72,14 @@ surfaces/4 = {
 }
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.0981165, 0.0957424, 0.0397321 )
+extents = Vector3( 0.0981165, 0.0584667, 0.0107176 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.00920874, 0.0606611, 0.0126617 )
+
+[sub_resource type="CylinderShape" id=4]
+radius = 0.0495437
+height = 0.00762285
 
 [node name="Monitor" type="StaticBody"]
 script = ExtResource( 7 )
@@ -86,9 +93,17 @@ material/3 = null
 material/4 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0929293, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.109821, 0 )
 shape = SubResource( 2 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0654462, -0.0290523 )
+shape = SubResource( 3 )
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 0.00996845, 0, 0, 0, 0.0100176, -7.86784e-06, 0, 7.1724e-06, 0.00913218, 0, 0.108983, 0.00543524 )
 texture = ExtResource( 6 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00241781, 0 )
+shape = SubResource( 4 )

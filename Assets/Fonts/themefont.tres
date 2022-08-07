@@ -3,7 +3,7 @@
 [ext_resource path="res://Assets/Fonts/EduSABeginner-VariableFont_wght.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 43
+size = 36
 outline_size = 1
 use_filter = true
 font_data = ExtResource( 1 )

@@ -14,6 +14,7 @@ onready var bell = root.get_child(4).get_child(3)
 onready var waterTank = root.get_child(4).get_child(4)
 onready var xray = root.get_child(4).get_child(6)
 onready var bin = root.get_child(4).get_child(8)
+onready var shaker = root.get_child(4).get_child(9)
 onready var interactables = [tray, bell, bin, card, xray, waterTank]
 
 var holdingItem = false
@@ -23,11 +24,13 @@ func get_interactable():
 	return interactor.get_collider()
 
 
-func _process(_delta):
+func _process(delta):
+	
 	var interactedObj = get_interactable()
+	print(interactedObj)
 	
 	#dropping dice
-	if Input.is_action_just_pressed("click") && holdingItem && heldItem.bodiesEntered == 0:
+	if Input.is_action_just_pressed("click") && holdingItem && ((heldItem.bodiesEntered == 0 && heldItem.name == "Dice") or heldItem.name == "shaker"):
 		heldItem.get_node("MeshInstance").get_active_material(0).get_next_pass().set_shader_param("color", Color(0, 0, 0, 0))
 		heldItem.mode = RigidBody.MODE_RIGID
 		heldItem.pickedUp = false
@@ -39,7 +42,7 @@ func _process(_delta):
 		if interactedObj != null && !holdingItem:
 			
 			
-			if interactedObj.name == 'Dice':
+			if interactedObj.name == 'Dice' or interactedObj.name == 'shaker':
 				
 				if Input.is_action_just_pressed("click"):
 					holdingItem = true
@@ -51,9 +54,9 @@ func _process(_delta):
 			
 			
 			if interactedObj.name == 'Door':
-				var xrayInteractor = xray.get_node('Button')
+				var xray = interactedObj.get_node('../Button')
 				if Input.is_action_just_pressed("click"):
-					xrayInteractor.moveDoor()
+					xray.moveDoor()
 			
 			if interactedObj.name == 'UserCard' or interactedObj.name == 'Tray':
 				interactedObj.isHovered = true	
@@ -74,7 +77,7 @@ func _process(_delta):
 			interactedObj.get_node("Mesh").get_active_material(0).get_next_pass().set_shader_param("color", Color(255, 255,255, 0))
 		
 					
-					
+	#move the held item to the correct location				
 	if holdingItem:
 		heldItem.get_node("MeshInstance").get_active_material(0).get_next_pass().set_shader_param("color", Color(255, 255,255, 0))
 	

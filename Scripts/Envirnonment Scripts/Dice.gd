@@ -23,7 +23,7 @@ onready var outline = preload('res://Assets/3D Models/more mats/outline.tres')
 
 var originalPos
 
-var faces = [Vector3(0, 0, -90), Vector3(90, 0, 0), Vector3(0, 0, 90), Vector3(-90, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 180)] 
+var faces = [Vector3(0, 0, -PI/2), Vector3(PI/2, 0, 0), Vector3(0, 0, PI/2), Vector3(-PI/2, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, PI)] 
 
 onready var fallingFace = faces[0]
 
@@ -31,11 +31,23 @@ func _ready():
 	originalPos = global_transform.origin
 	translation = Vector3(0, 1, -1)
 
-func setRot():
+func setShakerSide():
+	var faceIndex = randi() % faces.size()
+	var face = faces[faceIndex]
+	
+	if rigged:
+		if faceIndex < 4:
+			face = faces[faceIndex + 2] 
+
+	rotation = face
+	
+
+
+func setRot(delta):
 	if mode == RigidBody.MODE_RIGID:
 		mode = RigidBody.MODE_KINEMATIC
 	
-	rotation = fallingFace
+	rotation = lerp(rotation, fallingFace, .85 * delta)
 
 func setUpright():
 	rotation = faces[4]
@@ -45,15 +57,14 @@ func _physics_process(delta):
 		waterTimer -= delta
 	
 	if waterTimer <= 0 and wet:
-		setRot()
+		setRot(delta)
 
 
-func _on_TestArea_body_entered(_body):
+func _on_TestArea_body_entered(body):
 	bodiesEntered += 1
 
-	
 
-func _on_TestArea_body_exited(_body):
+func _on_TestArea_body_exited(body):
 	bodiesEntered -= 1
 
 
@@ -68,7 +79,7 @@ func _on_TestArea_area_entered(area):
 		if rigged and face < 3:
 			face += 2
 		fallingFace = faces[face]
-		waterTimer = 2 
+		waterTimer = 4 
 		wet = true
 		
 
